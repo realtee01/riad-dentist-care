@@ -1,0 +1,7 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Mona Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-display: "Mona Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+

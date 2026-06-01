@@ -43,7 +43,7 @@ const team = [
   {
     name: "Sarah Jenkins",
     role: "Registered Dental Hygienist",
-    image: "https://res.cloudinary.com/dw8jtwbka/image/upload/v1780256423/pexels-photo-37458097_bxoqn7.jpg",
+    image: "https://res.cloudinary.com/dw8jtwbka/image//upload/w_800,f_auto,q_auto/v1780256423/pexels-photo-37458097_bxoqn7.jpg",
     bio: "Sarah is passionate about patient education and ensuring every cleaning is gentle and pain-free."
   }
 ];
@@ -91,6 +91,7 @@ const HeroSlider = () => {
             alt={`Modern dental clinic interior ${index + 1}`} 
             fetchPriority={index === 0 ? "high" : "auto"}
             loading={index === 0 ? "eager" : "lazy"}
+            decoding={index === 0 ? "sync" : "async"}
             className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
               index === currentImageIndex ? "opacity-70" : "opacity-0"
             }`}
@@ -158,29 +159,33 @@ export default function Home() {
   const [expandedTestimonial, setExpandedTestimonial] = useState<number | null>(null);
 
   useEffect(() => {
-    supabase
-      .from('services')
-      .select('*')
-      .eq('is_active', true)
-      .order('price', { ascending: true })
-      .then(({ data, error }) => {
+    const fetchServices = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('services')
+          .select('*')
+          .eq('is_active', true)
+          .order('price', { ascending: true });
+        
         if (error) throw error;
         if (data && data.length > 0) {
-          setServices(data);
+          setServices(data as Service[]);
         } else {
           throw new Error("No data");
         }
-        setLoading(false);
-      })
-      .catch((error) => {
+      } catch (error) {
         console.error('Error fetching services:', error);
         setServices([
           { id: '1', name: 'Comprehensive Checkup & Cleaning', description: 'A thorough examination of your teeth and gums, followed by a professional cleaning to remove plaque and tartar.', duration_minutes: 60, price: 150, is_active: true },
           { id: '2', name: 'Professional Teeth Whitening', description: 'Safe and effective teeth whitening treatment to brighten your smile by several shades in just one session.', duration_minutes: 90, price: 299, is_active: true },
           { id: '3', name: 'Dental Fillings', description: 'High-quality composite fillings to repair cavities and restore the natural appearance and function of your teeth.', duration_minutes: 45, price: 180, is_active: true }
         ] as Service[]);
+      } finally {
         setLoading(false);
-      });
+      }
+    };
+
+    fetchServices();
   }, []);
 
   const ServicesGrid = useMemo(() => (
@@ -192,12 +197,12 @@ export default function Home() {
               <img 
               loading="lazy" decoding="async"
               src={service.image_url || [
-                "https://res.cloudinary.com/dw8jtwbka/image/upload/v1780255598/pexels-photo-8413334_ikelwa.jpg",
-                "https://res.cloudinary.com/dw8jtwbka/image/upload/v1780255662/pexels-photo-6627320_njyw83.jpg",
-                "https://res.cloudinary.com/dw8jtwbka/image/upload/v1780255732/pexels-photo-6627330_gus01z.jpg",
-                "https://res.cloudinary.com/dw8jtwbka/image/upload/v1780255794/pexels-photo-5622257_adkdqj.jpg",
-                "https://res.cloudinary.com/dw8jtwbka/image/upload/v1780256192/pexels-photo-3845954_gkdfmh.jpg",
-                "https://res.cloudinary.com/dw8jtwbka/image/upload/v1780255624/pexels-photo-16430838_afn2ya.jpg"
+                "https://res.cloudinary.com/dw8jtwbka/image//upload/w_800,f_auto,q_auto/v1780255598/pexels-photo-8413334_ikelwa.jpg",
+                "https://res.cloudinary.com/dw8jtwbka/image//upload/w_800,f_auto,q_auto/v1780255662/pexels-photo-6627320_njyw83.jpg",
+                "https://res.cloudinary.com/dw8jtwbka/image//upload/w_800,f_auto,q_auto/v1780255732/pexels-photo-6627330_gus01z.jpg",
+                "https://res.cloudinary.com/dw8jtwbka/image//upload/w_800,f_auto,q_auto/v1780255794/pexels-photo-5622257_adkdqj.jpg",
+                "https://res.cloudinary.com/dw8jtwbka/image//upload/w_800,f_auto,q_auto/v1780256192/pexels-photo-3845954_gkdfmh.jpg",
+                "https://res.cloudinary.com/dw8jtwbka/image//upload/w_800,f_auto,q_auto/v1780255624/pexels-photo-16430838_afn2ya.jpg"
               ][index % 6]} 
               alt={service.name}
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"

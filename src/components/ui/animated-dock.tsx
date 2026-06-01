@@ -54,6 +54,7 @@ export const AnimatedDock = ({ className, items }: AnimatedDockProps) => {
 };
 
 interface DockItemProps {
+  key?: React.Key;
   mouseX: MotionValue<number>;
   children: React.ReactNode;
 }

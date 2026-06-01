@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence, useInView } from 'motion/react';
 import { ChevronRight, X, Camera, MapPin, Search } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -17,8 +17,8 @@ const galleryCases = [
   {
     id: 1,
     category: "Smile Makeover",
-    beforeImg: "https://res.cloudinary.com/dw8jtwbka/image/upload/v1780301345/bfr_vjxaug.jpg",
-    afterImg: "https://res.cloudinary.com/dw8jtwbka/image/upload/v1780301345/bfr_vjxaug.jpg",
+    beforeImg: "https://res.cloudinary.com/dw8jtwbka/image//upload/w_800,f_auto,q_auto/v1780301345/bfr_vjxaug.jpg",
+    afterImg: "https://res.cloudinary.com/dw8jtwbka/image//upload/w_800,f_auto,q_auto/v1780301345/bfr_vjxaug.jpg",
     isCollage: true,
     collageLayout: "top-after" as const,
     treatment: "Complete Smile Makeover",
@@ -30,8 +30,8 @@ const galleryCases = [
   {
     id: 2,
     category: "Veneers",
-    beforeImg: "https://res.cloudinary.com/dw8jtwbka/image/upload/v1780301344/after_mrttqq.jpg",
-    afterImg: "https://res.cloudinary.com/dw8jtwbka/image/upload/v1780301344/after_mrttqq.jpg",
+    beforeImg: "https://res.cloudinary.com/dw8jtwbka/image//upload/w_800,f_auto,q_auto/v1780301344/after_mrttqq.jpg",
+    afterImg: "https://res.cloudinary.com/dw8jtwbka/image//upload/w_800,f_auto,q_auto/v1780301344/after_mrttqq.jpg",
     isCollage: true,
     collageLayout: "top-before" as const,
     treatment: "Porcelain Veneers",
@@ -43,8 +43,8 @@ const galleryCases = [
   {
     id: 3,
     category: "Teeth Whitening",
-    beforeImg: "https://res.cloudinary.com/dw8jtwbka/image/upload/v1780306474/teeth-whitening-1_hl3wzc.jpg",
-    afterImg: "https://res.cloudinary.com/dw8jtwbka/image/upload/v1780306474/teeth-whitening-1_hl3wzc.jpg",
+    beforeImg: "https://res.cloudinary.com/dw8jtwbka/image//upload/w_800,f_auto,q_auto/v1780306474/teeth-whitening-1_hl3wzc.jpg",
+    afterImg: "https://res.cloudinary.com/dw8jtwbka/image//upload/w_800,f_auto,q_auto/v1780306474/teeth-whitening-1_hl3wzc.jpg",
     isCollage: true,
     collageLayout: "left-before" as const,
     treatment: "In-Clinic Laser Whitening",
@@ -56,8 +56,8 @@ const galleryCases = [
   {
     id: 4,
     category: "Orthodontics",
-    beforeImg: "https://res.cloudinary.com/dw8jtwbka/image/upload/v1780305935/pexels-photo-13422325_trpcll.jpg",
-    afterImg: "https://res.cloudinary.com/dw8jtwbka/image/upload/v1780305908/pexels-photo-6529110_e3v9vb.jpg",
+    beforeImg: "https://res.cloudinary.com/dw8jtwbka/image//upload/w_800,f_auto,q_auto/v1780305935/pexels-photo-13422325_trpcll.jpg",
+    afterImg: "https://res.cloudinary.com/dw8jtwbka/image//upload/w_800,f_auto,q_auto/v1780305908/pexels-photo-6529110_e3v9vb.jpg",
     isCollage: false,
     treatment: "Invisible Aligners",
     concern: "Crowded Lower Teeth",
@@ -68,8 +68,8 @@ const galleryCases = [
   {
     id: 5,
     category: "Dental Implants",
-    beforeImg: "https://res.cloudinary.com/dw8jtwbka/image/upload/v1780301345/before_fter_ege97w.jpg",
-    afterImg: "https://res.cloudinary.com/dw8jtwbka/image/upload/v1780301345/before_fter_ege97w.jpg",
+    beforeImg: "https://res.cloudinary.com/dw8jtwbka/image//upload/w_800,f_auto,q_auto/v1780301345/before_fter_ege97w.jpg",
+    afterImg: "https://res.cloudinary.com/dw8jtwbka/image//upload/w_800,f_auto,q_auto/v1780301345/before_fter_ege97w.jpg",
     isCollage: true,
     collageLayout: "top-after" as const,
     treatment: "Tooth implant",
@@ -81,8 +81,8 @@ const galleryCases = [
   {
     id: 6,
     category: "Bonding",
-    beforeImg: "https://res.cloudinary.com/dw8jtwbka/image/upload/v1780305879/full_face_final_3__oczvip.jpg",
-    afterImg: "https://res.cloudinary.com/dw8jtwbka/image/upload/v1780305879/full_face_final_3__oczvip.jpg",
+    beforeImg: "https://res.cloudinary.com/dw8jtwbka/image//upload/w_800,f_auto,q_auto/v1780305879/full_face_final_3__oczvip.jpg",
+    afterImg: "https://res.cloudinary.com/dw8jtwbka/image//upload/w_800,f_auto,q_auto/v1780305879/full_face_final_3__oczvip.jpg",
     isCollage: true,
     collageLayout: "left-before" as const,
     treatment: "Cosmetic Bonding",
@@ -118,7 +118,7 @@ const BeforeAfterSlider = ({ beforeImg, afterImg, isCollage, collageLayout = 'to
   return (
     <div 
       ref={containerRef}
-      className={`relative w-full h-full overflow-hidden select-none touch-none ${className}`}
+      className={`relative w-full h-full overflow-hidden select-none touch-pan-y ${className}`}
       onMouseUp={() => setIsDragging(false)}
       onMouseLeave={() => setIsDragging(false)}
       onMouseMove={handleMouseMove}
@@ -157,11 +157,11 @@ const BeforeAfterSlider = ({ beforeImg, afterImg, isCollage, collageLayout = 'to
           }} // Adjust based on parent size via css
           aria-label="Before treatment"
         />
-        <img src={beforeImg} className="min-w-[1000%] opacity-0 pointer-events-none" alt="" />
+        <img loading="lazy" decoding="async" src={beforeImg} className="min-w-[1000%] opacity-0 pointer-events-none" alt="" />
       </div>
 
       <div 
-        className="absolute top-0 bottom-0 z-10 bg-white w-1 cursor-ew-resize cursor-[col-resize] touch-action-none"
+        className="absolute top-0 bottom-0 z-10 bg-white w-1 cursor-ew-resize cursor-[col-resize] touch-pan-y"
         style={{ left: `calc(${sliderPosition}% - 2px)` }}
       >
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 md:w-10 md:h-10 bg-white rounded-full shadow-[0_0_15px_rgba(0,0,0,0.3)] flex items-center justify-center pointer-events-none">
@@ -218,7 +218,7 @@ const NumberTicker = ({ value, label, inView }: { value: number, label: string, 
 export default function BeforeAfterGallery() {
   const [activeTab, setActiveTab] = useState("All Treatments");
   const [selectedCase, setSelectedCase] = useState<typeof galleryCases[0] | null>(null);
-  const containerRef = useRef(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, margin: "-100px" });
 
   const filteredCases = activeTab === "All Treatments" 
@@ -281,7 +281,7 @@ export default function BeforeAfterGallery() {
                 onClick={() => setSelectedCase(item)}
               >
                 <div className="relative aspect-[4/3] bg-slate-100 w-full overflow-hidden">
-                  <BeforeAfterSlider beforeImg={item.beforeImg} afterImg={item.afterImg} isCollage={item.isCollage} collageLayout={item.collageLayout} />
+                  <BeforeAfterSlider className="pointer-events-none" beforeImg={item.beforeImg} afterImg={item.afterImg} isCollage={item.isCollage} collageLayout={item.collageLayout} />
                   <div className="absolute inset-0 bg-slate-900/0 group-hover:bg-slate-900/10 transition-colors pointer-events-none z-20 flex items-center justify-center">
                     <div className="bg-white/90 backdrop-blur-sm text-slate-900 px-4 py-2 rounded-full font-medium text-sm translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
                       View Details

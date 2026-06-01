@@ -2,10 +2,11 @@ import { useEffect, useState, useMemo } from 'react';
 import { supabase } from '@/lib/supabase';
 import { type Service } from '@/types/database';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Star, Clock, CheckCircle2, Quote, Shield, HeartPulse, ChevronDown, ChevronUp } from 'lucide-react';
+import { ArrowRight, Star, Crown, Clock, CheckCircle2, Quote, Shield, HeartPulse, ChevronDown, ChevronUp } from 'lucide-react';
 import { Facebook, Twitter, Youtube, Flower } from 'lucide-react';
 import { AnimatedDock } from '@/components/ui/animated-dock';
 import { motion, AnimatePresence } from 'motion/react';
+import BeforeAfterGallery from '@/components/ui/BeforeAfterGallery';
 
 const faqs = [
   {
@@ -100,9 +101,9 @@ const HeroSlider = () => {
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 text-white w-full">
         <div className="max-w-2xl mt-12 md:mt-0">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/20 mb-8">
-            <Star className="w-4 h-4 text-teal-400" />
-            <span className="text-sm font-medium text-teal-50">Premium Dental Care</span>
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 mb-8 shadow-sm">
+            <Crown className="w-3.5 h-3.5 text-teal-400" strokeWidth={1.5} />
+            <span className="text-xs font-semibold uppercase tracking-widest text-teal-50">Premium Dental Care</span>
           </div>
           <h1 className="text-5xl md:text-7xl font-display font-bold tracking-tight mb-6 leading-[1.1]">
             A healthier smile,<br />
@@ -114,10 +115,10 @@ const HeroSlider = () => {
           <div className="flex flex-col sm:flex-row gap-4 mb-8">
             <Link
               to="/book"
-              className="inline-flex items-center justify-center px-8 py-4 rounded-full bg-teal-500 text-white text-lg font-medium hover:bg-teal-400 hover:shadow-lg hover:shadow-teal-500/30 transition-all transform hover:scale-105 active:scale-95 duration-200"
+              className="group inline-flex items-center justify-center px-8 py-3.5 rounded-full bg-teal-500 text-white text-sm font-semibold tracking-widest uppercase hover:bg-teal-400 shadow-lg shadow-teal-500/20 transition-all duration-300 transform hover:scale-105 active:scale-95"
             >
               Book Consultation
-              <ArrowRight className="w-5 h-5 ml-2" />
+              <ArrowRight className="w-4 h-4 ml-3 group-hover:translate-x-1 transition-transform" strokeWidth={1.5} />
             </Link>
           </div>
 
@@ -281,9 +282,9 @@ export default function Home() {
               </div>
             </div>
             <div className="lg:w-1/2">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-50 text-teal-700 font-medium text-sm border border-teal-100 mb-6">
-                <Shield className="w-4 h-4" />
-                Trusted Dental Care
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-50 border border-slate-200 mb-6 shadow-sm">
+                <Shield className="w-3.5 h-3.5 text-teal-600" strokeWidth={1.5} />
+                <span className="text-xs font-semibold uppercase tracking-widest text-slate-800">Trusted Dental Care</span>
               </div>
               <h2 className="text-3xl md:text-5xl font-display font-bold text-slate-900 mb-6">Expert care in a calming environment</h2>
               <p className="text-lg text-slate-600 mb-8 leading-relaxed">
@@ -306,6 +307,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Before & After Gallery */}
+      <BeforeAfterGallery />
 
       {/* Testimonials */}
       <section className="py-24 bg-teal-900 text-teal-50 relative overflow-hidden">

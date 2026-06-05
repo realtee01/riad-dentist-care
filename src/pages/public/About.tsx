@@ -8,10 +8,8 @@ export default function About() {
       <section className="pt-32 pb-24 md:pt-40 md:pb-32 bg-slate-900 border-b border-slate-800 text-white relative overflow-hidden flex items-center justify-center">
         <div className="absolute inset-0 z-0">
           <img 
-            src="https://res.cloudinary.com/dw8jtwbka/image/upload/w_1200,f_auto,q_auto/v1780247903/pexels-photo-19976568_ubcwqp.jpg" 
+            src="https://res.cloudinary.com/dw8jtwbka/image/upload/v1780247903/pexels-photo-19976568_ubcwqp.jpg" 
             alt="Rita's Dental Care Team" 
-            fetchPriority="high"
-            decoding="sync"
             className="w-full h-full object-cover opacity-60"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-slate-900/90 via-slate-900/60 to-transparent"></div>
